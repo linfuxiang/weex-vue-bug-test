@@ -1,23 +1,31 @@
 <template>
-  <div>
-    <div class="top">
+  <div class="wrapper">
+    <div class="top" @click="update" ref="top">
       <text>顶部导航栏</text>
     </div>
-    <list class="wrapper">
+    <!-- :style="{height:hei}" -->
+    <list>
       <cell v-for="item in items">
         <image src="https://alibaba.github.io/weex/img/weex_logo_blue@3x.png" class="logo"></image>
         <text class="title">Hello {{item}}</text>
       </cell>
     </list>
-    <div class="inp">
+    <div class="inp" ref="inp">
       <input type="text" class="input" v-model="inputVal"></input>
     </div>
+    <div class="aaaa" ref="aaaa"></div>
   </div>
 </template>
 
 <style>
+  .wrapper {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100%;
+  }
   .top {
-    position: fixed;
+    /*position: fixed;*/
     top: 0;
     z-index: 10;
     height: 100px;
@@ -29,10 +37,10 @@
   }
   .wrapper { 
     align-items: center;
-    margin-top: 100px;
+    /*margin-top: 100px;*/
     /*padding-bottom: 100px;*/
     width: 750px;
-    height: 834px;
+    /*height: 800px;*/
   }
   .title { 
     font-size: 48px; 
@@ -43,7 +51,7 @@
   }
   .inp {
     /*position: fixed;*/
-    /*bottom: 0px;*/
+    /*bottom: 1000px;*/
     height: 100px;
     width: 750px;
     background-color: yellow;
@@ -61,23 +69,48 @@
     height: 50px;
     background-color: #f0ede2;
   }
+  .aaaa {
+    position: fixed;
+    bottom: 0px;
+    width: 750px;
+    height: 0px;
+  }
 </style>
 
 <script>
+  const dom = weex.requireModule('dom')
+
   export default {
     data() {
       return {
         logoUrl: 'https://alibaba.github.io/weex/img/weex_logo_blue@3x.png',
         target: 'World',
         items: [1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4],
-        inputVal: ''
+        inputVal: '',
+        hei: '800px',
       }
     },
     methods: {
       update: function (e) {
-        this.target = 'Weex'
-        console.log('target:', this.target)
+        dom.getComponentRect(this.$refs.aaaa, option => {
+          this.hei = option.size.top - 200 + 'px';
+          console.log(this.hei)
+          console.log('getComponentRect:', option.size)
+        })
+        dom.getComponentRect(this.$refs.top, option => {
+          // this.hei = option.size.top - 
+          console.log('getComponentRect:', option.size)
+        })
       }
-    }
+    },
+    mounted() {
+      console.log(weex.config)
+      dom.getComponentRect(this.$refs.inp, option => {
+        console.log('getComponentRect:', option.size)
+      })
+      dom.getComponentRect(this.$refs.aaaa, option => {
+        console.log('getComponentRect:', option.size)
+      })
+    },
   }
 </script>
