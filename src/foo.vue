@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
-    <div class="top" @click="update" ref="top">
+    <!-- <div class="top" @click="update" ref="top">
       <text>顶部导航栏</text>
     </div>
-    <!-- :style="{height:hei}" -->
+    :style="{height:hei}"
     <list>
       <cell v-for="item in items">
         <image src="https://alibaba.github.io/weex/img/weex_logo_blue@3x.png" class="logo"></image>
@@ -13,11 +13,16 @@
     <div class="inp" ref="inp">
       <input type="text" class="input" v-model="inputVal"></input>
     </div>
-    <div class="aaaa" ref="aaaa"></div>
+    <div class="aaaa" ref="aaaa"></div> -->
+    <div v-html="abc" class="aaa"></div>
   </div>
 </template>
 
 <style>
+.aaa {
+  font-size: 30px;
+  color: red;
+  }
   .wrapper {
     flex-direction: column;
     justify-content: space-between;
@@ -88,6 +93,7 @@
         items: [1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4],
         inputVal: '',
         hei: '800px',
+        abc: '<text class="aaa">123</text><a href="https://baidu.com"><text class="aaa">abc</text></a>'
       }
     },
     methods: {
