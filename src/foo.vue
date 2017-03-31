@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <!-- <div class="top" @click="update" ref="top">
-      <text>é¡¶éƒ¨å¯¼èˆªæ </text>
+      <text>¶¥²¿µ¼º½À¸</text>
     </div>
     :style="{height:hei}"
     <list>
